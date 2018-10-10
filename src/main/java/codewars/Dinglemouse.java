@@ -3,25 +3,22 @@ package codewars;
 import java.util.*;
 
 import com.google.common.primitives.Ints;
+import org.apache.commons.collections4.MultiValuedMap;
+import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 
 public class Dinglemouse {
 
     public static int[] sort(final int array[]) {
 
-        TreeMap<String, Integer> sourceMap = new TreeMap<>();
+        MultiValuedMap<String, Integer> sourceMap = new ArrayListValuedHashMap<>();
         List<Integer> sortedArray = new ArrayList<>();
 
         for (int i : array) {
             sourceMap.put(convert(i), i);
         }
 
-        Set set = sourceMap.entrySet();
-
-        Iterator it = set.iterator();
-
-        while(it.hasNext()) {
-            Map.Entry me = (Map.Entry)it.next();
-           sortedArray.add((Integer)(me.getValue()));
+        for (Integer value : sourceMap.values()) {
+            sortedArray.add(value);
         }
 
         int[] targetArray = Ints.toArray(sortedArray);
@@ -48,6 +45,8 @@ public class Dinglemouse {
 
 
     public static void main(String[] args) {
+        System.out.println(Arrays.toString(Dinglemouse.sort(new int[]{1, 2, 2, 3, 4})));
+        System.out.println(Arrays.toString(Dinglemouse.sort(new int[]{9, 99, 999})));
         System.out.println(Arrays.toString(Dinglemouse.sort(new int[]{8, 8, 9, 9, 10, 10})));
     }
 }
